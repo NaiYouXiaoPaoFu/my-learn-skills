@@ -1,0 +1,4 @@
+interface:
+  display_name: "Issue PR Intake"
+  short_description: "Extract precise learning context from pasted issues and PRs."
+  default_prompt: "Extract the precise context from this pasted issue or PR."
