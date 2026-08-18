@@ -5,7 +5,7 @@ description: "讲后理解检验和面试式追问。Use when the user asks to �
 
 # Learning Checkpoint
 
-IRON LAW: 检验必须短、具体、和当前项目场景相关；追问最多两轮，错了先补课，不无限连问。
+IRON LAW: 教学检验必须短、具体、和当前项目场景相关；默认追问最多两轮，错了先补课。独立的 `interview-simulator` 面试不受此短检验上限约束。
 
 ## 职责
 
@@ -18,9 +18,8 @@ IRON LAW: 检验必须短、具体、和当前项目场景相关；追问最多�
 - [ ] Step 3: 需要面试式追问时读取 `.agents/skills/references/interview-checkpoint-style.md`
 - [ ] Step 4: 选择一种题型：概念复述、对比判断、场景判断、最小实操、排错判断、面试追问
 - [ ] Step 5: 先让用户回答，不直接给完整答案
-- [ ] Step 6: 用户答错时先补缺口，再最多追问 1 到 2 个相邻问题
-- [ ] Step 7: 两轮仍不稳时停止追问，标记未掌握并交给 `concept-teacher`
-
+- [ ] Step 6: 用户答错时先补缺口，再最多追问 1 到 2 个相邻问题；如果用户明确进入独立模拟面试，改由 `interview-simulator` 管理面试节奏
+- [ ] Step 7: 两轮仍不稳时停止教学检验，标记未掌握并交给 `concept-teacher`
 ## 输出格式
 
 - 主题：

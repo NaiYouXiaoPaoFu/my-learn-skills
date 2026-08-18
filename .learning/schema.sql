@@ -35,6 +35,18 @@ CREATE TABLE IF NOT EXISTS learning_sessions (
   ended_at TEXT
 );
 
+CREATE TABLE IF NOT EXISTS learning_plans (
+  id INTEGER PRIMARY KEY,
+  session_id INTEGER NOT NULL UNIQUE REFERENCES learning_sessions(id) ON DELETE CASCADE,
+  scope TEXT NOT NULL,
+  non_goals TEXT NOT NULL,
+  prerequisites TEXT NOT NULL,
+  stages TEXT NOT NULL,
+  evidence TEXT NOT NULL,
+  stop_condition TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS checkpoints (
   id INTEGER PRIMARY KEY,
   session_id INTEGER NOT NULL REFERENCES learning_sessions(id) ON DELETE CASCADE,

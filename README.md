@@ -12,9 +12,9 @@
 - issue/PR 优先：用户粘贴 issue、PR 或 review comments 时，先抽取精准上下文，不扫全仓库。
 - 参考资料留痕：教学时用到的外部文档链接，要随回答输出或写入总结文档对应知识点。
 
-## 当前 Skill 图谱
-
 - `learn-orchestrator`：学习流程路由和组合。
+- `adaptive-tutor`：不预设前置知识，生成可验证的 OpenSpec 风格教学计划并控制主线。
+- `interview-simulator`：真实模拟面试、连续追问和逐题复盘。
 - `issue-pr-intake`：从 issue、PR、评论或链接提取精准上下文。
 - `learn-context`：收集最小必要项目上下文。
 - `project-deep-dive`：把项目或模块拆成学习切片。
@@ -26,6 +26,8 @@
 - `learning-checkpoint`：出短题或最小实操检验理解。
 - `learning-note-writer`：把稳定结论分层回写。
 
+通用系统提示词：`docs/tutor-system-prompt.md`。
+
 ## 典型组合
 
 - 学项目：`learn-context` -> `project-deep-dive` -> `learning-checkpoint`
@@ -35,6 +37,24 @@
 - 做 Review：`learn-context` -> `review-coach` -> `concept-teacher` -> `learning-checkpoint`
 - 写沉淀：`learning-checkpoint` -> `learning-note-writer`
 
+
+## 持久化工作流
+
+数据库位于 `.learning/learning-state.sqlite3`，通过 `scripts/learning_state.py` 操作：
+
+```bash
+python3 scripts/learning_state.py init
+python3 scripts/learning_state.py topic-start <slug> <title> --target-level 3
+python3 scripts/learning_state.py plan-start --topic <slug> --goal <goal> --scope <scope> --non-goals <non-goals> --prerequisites <prerequisites> --stages <stages> --evidence <evidence> --stop-condition <stop-condition>
+python3 scripts/learning_state.py checkpoint-add --session <id> --question <question> --result partial --evidence <evidence>
+python3 scripts/learning_state.py knowledge-set --topic <slug> --skill <skill> --level 2 --confidence 0.5 --evidence <evidence> --next-action <action>
+python3 scripts/learning_state.py interview-start --goal <goal> --mode project-deep-dive --dimensions <dimensions> --stop-condition <condition>
+python3 scripts/learning_state.py interview-question --interview <id> --sequence 1 --question <question> --result partial --score 2 --evidence <evidence>
+python3 scripts/learning_state.py interview-finish --interview <id> --result <result> --scores <json> --strengths <text> --gaps <text> --next-actions <text>
+python3 scripts/learning_state.py next
+```
+
+通用导师系统提示词位于 `docs/tutor-system-prompt.md`。
 ## 来源约束
 
 本仓库的规则抽象自本地 `blog` 仓库里的学习型项目要求：真实业务链路、工程门禁、单主题 issue、讲后检验、分层回写。外部 GitHub 候选只吸收可借鉴模式，不直接照搬。
