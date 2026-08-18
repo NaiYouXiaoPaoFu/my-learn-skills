@@ -48,4 +48,12 @@ Stop Condition: <checkpoint / review done / stable note / blocked question>
 - 不要用“参考官方文档”代替具体链接。
 - 不要用本仓库的规则覆盖目标仓库原有项目规则。
 - 不要把临时 workaround 写入长期文档。
+
+## 自适应教学与持久状态
+
+- 当用户显露知识缺口时，先用 `source-researcher` 查官方或权威资料；不得按默认前置知识继续推进。
+- 对单一概念、资料或项目切片，先用 `adaptive-tutor` 输出 Goal、Scope、Non-goals、Prerequisites、Stages、Evidence 和 Stop Condition，再进入教学。
+- 相关概念只能在明确服务当前 Goal 时展开；否则登记为后续候选，主线完成或用户切换前不得继续扩展。
+- 用 `.learning/learning-state.sqlite3` 持久记录主题、学习计划、来源、检验、误区、面试和稳定偏好；未通过检验或未经用户确认的结论不得写成掌握状态。
+- 用户明确进入模拟面试时使用 `interview-simulator`。面试期间不教学、不提示；结束后必须复盘并写入数据库。`learning-checkpoint` 的两轮上限只适用于教学后的短检验，不限制独立模拟面试的计划范围。
 - 不要让 `review-coach` 代替教学主链路。

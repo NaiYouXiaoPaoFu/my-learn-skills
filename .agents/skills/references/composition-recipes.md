@@ -41,7 +41,14 @@
 1. `source-researcher`：查官方资料或权威来源。
 2. `concept-teacher`：结合项目场景讲清概念。
 3. `learning-checkpoint`：检验理解。
-4. `learning-note-writer`：反复出现或通过检验后再沉淀。
+
+## 资料驱动的单一概念学习
+
+1. `source-researcher`：按官方优先查证资料并保留链接。
+2. `adaptive-tutor`：生成 Goal / Scope / Non-goals / Evidence / Stop condition 计划并控制主线。
+3. `concept-teacher`：用项目场景、最小示例和有限拓展教学。
+4. `learning-checkpoint`：验证目标等级，不会则回退。
+5. `learning-note-writer`：仅在结论稳定后写入 SQLite 或学习笔记。
 
 ## Review 用户代码
 
