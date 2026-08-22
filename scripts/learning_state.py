@@ -22,8 +22,8 @@ def require(conn, table, value):
 
 def topic_start(a):
     with connection() as c:
-        c.execute("""INSERT INTO learning_topics(slug,title,source_context,target_level,status) VALUES(?,?,?,?,'active')
-        ON CONFLICT(slug) DO UPDATE SET title=excluded.title,source_context=excluded.source_context,target_level=excluded.target_level,status='active',updated_at=CURRENT_TIMESTAMP""", (a.slug,a.title,a.source_context,a.target_level))
+        c.execute("""INSERT INTO learning_topics(slug,title,source_context,summary_dir,summary_path,target_level,status) VALUES(?,?,?,?,?,?,'active')
+        ON CONFLICT(slug) DO UPDATE SET title=excluded.title,source_context=excluded.source_context,summary_dir=excluded.summary_dir,summary_path=excluded.summary_path,target_level=excluded.target_level,status='active',updated_at=CURRENT_TIMESTAMP""", (a.slug,a.title,a.source_context,a.summary_dir,a.summary_path,a.target_level))
         emit(c.execute("SELECT * FROM learning_topics WHERE slug=?",(a.slug,)).fetchone())
 def plan_start(a):
     plan={k:getattr(a,k.replace('-','_')) for k in ('goal','scope','non-goals','prerequisites','stages','evidence','stop-condition')}
@@ -73,7 +73,7 @@ def parser():
     p=argparse.ArgumentParser(); s=p.add_subparsers(dest='command',required=True)
     def cmd(n,f): q=s.add_parser(n); q.set_defaults(func=f); return q
     cmd('init',lambda a:initialize())
-    q=cmd('topic-start',topic_start); q.add_argument('slug');q.add_argument('title');q.add_argument('--source-context');q.add_argument('--target-level',type=int,default=2)
+    q=cmd('topic-start',topic_start); q.add_argument('slug');q.add_argument('title');q.add_argument('--source-context');q.add_argument('--summary-dir',default='docs/learning');q.add_argument('--summary-path');q.add_argument('--target-level',type=int,default=2)
     q=cmd('plan-start',plan_start); q.add_argument('--topic',required=True);q.add_argument('--goal',required=True);q.add_argument('--scope',required=True);q.add_argument('--non-goals',required=True);q.add_argument('--prerequisites',required=True);q.add_argument('--stages',required=True);q.add_argument('--evidence',required=True);q.add_argument('--stop-condition',required=True);q.add_argument('--target-level',type=int,default=2)
     q=cmd('source-add',source_add);q.add_argument('url');q.add_argument('--session',type=int);q.add_argument('--topic');q.add_argument('--type',required=True,choices=['official','documentation','blog','interview','repository','other']);q.add_argument('--title');q.add_argument('--version');q.add_argument('--confidence',default='medium',choices=['low','medium','high']);q.add_argument('--notes')
     q=cmd('checkpoint-add',checkpoint_add);q.add_argument('--session',required=True,type=int);q.add_argument('--question',required=True);q.add_argument('--answer');q.add_argument('--result',required=True,choices=['pass','partial','fail','not_answered']);q.add_argument('--evidence');q.add_argument('--tags')

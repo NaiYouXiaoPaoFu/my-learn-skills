@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS learning_topics (
   slug TEXT NOT NULL UNIQUE,
   title TEXT NOT NULL,
   source_context TEXT,
+  summary_dir TEXT NOT NULL DEFAULT 'docs/learning',
+  summary_path TEXT,
   target_level INTEGER NOT NULL DEFAULT 2 CHECK (target_level BETWEEN 0 AND 6),
   status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active','paused','completed')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
