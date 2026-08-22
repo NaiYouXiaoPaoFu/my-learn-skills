@@ -13,21 +13,18 @@ IRON LAW: 不默认用户会任何前置知识；先查证、先定一个可验�
 
 ## 工作流
 
-- [ ] Step 1: 读取当前学习状态；若无状态，声明“不预设前置知识”，用最少问题或小题评估。
-- [ ] Step 2: 让 `source-researcher` 查官方资料，再补充高质量文档/博客；记录版本、事实、争议和链接。
-- [ ] Step 3: 先输出教学计划，格式类似 OpenSpec：
-  - Goal：本轮要掌握的具体能力与目标等级
-  - Scope：本轮包含的最小概念和应用
-  - Non-goals：明确暂不展开的相关主题
-  - Prerequisites：待确认或需要补的前置
-  - Stages：资料校准 -> 概念 -> 最小示例 -> 项目应用 -> 检验
-  - Evidence：通过什么回答、实验或改写证明掌握
-  - Stop condition：达到目标等级、连续两轮不稳需回退、或用户停止
-- [ ] Step 4: 用户未反对计划后，调用 `concept-teacher`，允许使用类比、流程图、对比、错误示例、可补全代码和最小实验；不直接交付完整业务结果。
-- [ ] Step 5: 识别自然相关拓展。只有能解释“它如何帮助当前目标”才加入；否则记录为后续候选，不在本轮展开。
-- [ ] Step 6: 调用 `learning-checkpoint`。先让用户答；checkpoint 只负责出题、收集回答证据和指出局部错误。
-- [ ] Step 7: 由 `adaptive-tutor` 根据本轮和历史证据评估掌握等级、决定升级/保持/降级；若连续两轮仍不稳，停止追问，回退到更小概念并记录卡点；若达到目标，说明已掌握边界和未覆盖项。
-- [ ] Step 8: 只有形成稳定结论或用户明确要求时，交给 `learning-note-writer` 写入 SQLite/学习记录。
+- [ ] Step 1: 识别本轮教学主题、子概念和目标能力，生成稳定的 topic/skill key；不要用宽泛关键词代替主题匹配。
+- [ ] Step 2: 运行 `openspec list --json`。若存在相关 active change，读取其 proposal、design、specs、tasks 和状态；把当前阶段、审核状态、已完成任务、下一任务作为本轮工作流事实。若无相关 change，再创建 draft 教学方案 change，不得只写临时对话计划。
+- [ ] Step 3: 教学开始前必须查询 `.learning/learning-state.sqlite3`：相关 `learning_topics`、`knowledge_states`、最近 `checkpoints`、未解决 `misconceptions`、相关 `source_references` 和已确认 `learner_preferences`。OpenSpec 负责当前过程，SQLite 负责长期证据。
+- [ ] Step 4: 根据状态证据分流教学：无记录 -> 最小前置评估；level 0-1 -> 从更小概念和最小示例开始；level 2-3 -> 跳过已稳定基础，集中练习边界和调用链；level 4-5 -> 以排错、取舍和迁移题为主；level 6 -> 不重复教学，改做新场景验证或进入下一依赖主题。低 confidence、partial/failed checkpoint 和未解决 misconception 必须优先处理。
+- [ ] Step 5: 让 `source-researcher` 查官方资料，再补充高质量文档、博客或源码；记录版本、事实、争议和链接。不得因已有学习记录而跳过需要查证的外部事实。
+- [ ] Step 6: 基于状态证据编写并更新 draft proposal：Goal、当前已知与证据、未稳点、Scope、Non-goals、每项取舍理由、Prerequisites、Stages、Evidence、Checkpoint 设计、Stop condition、待确认问题。同步维护 design 和 tasks，不另建平行方案目录作为状态源。
+- [ ] Step 7: 先向用户展示待审核方案，等待明确批准或修改；批准前不得正式教学、推进 tasks 或写入正式 learning session。
+- [ ] Step 8: 用户批准后更新 proposal/design/tasks 为 approved，再调用 `concept-teacher`；被插话或中断时先更新 tasks 状态，恢复时从 OpenSpec 下一项任务继续。
+- [ ] Step 9: 识别自然相关拓展。只有能解释“它如何帮助当前 Goal”时才加入；否则记录为后续候选，不在本轮展开。
+- [ ] Step 10: 调用 `learning-checkpoint`。小节 checkpoint 只验证当前小节；章节综合 checkpoint 必须跨本章 Scope 与相关 Non-goals 设计，考察整体连接、边界、取舍和迁移，但不把未教学内容当作已掌握来扣分。
+- [ ] Step 11: 由 `adaptive-tutor` 根据本轮和历史证据评估掌握等级、决定升级/保持/降级；更新 tasks 和 checkpoint 证据。若连续两轮仍不稳，回退到更小概念并记录卡点。
+- [ ] Step 12: 只有形成稳定结论或用户明确要求时，交给 `learning-note-writer` 写入 SQLite/学习记录；章节完成后等待用户确认，不能自动 archive 或进入下一章。
 
 ## 输出格式
 

@@ -23,10 +23,11 @@ IRON LAW: 只编排，不代替子 skill 做教学、Review、实现、面试或
   - 模拟面试/拷打 -> `learn-context`（如有项目）-> `source-researcher`（如需面经）-> `interview-simulator`
   - 讲后确认 -> `learning-checkpoint`
   - 稳定结论或面试复盘 -> `learning-note-writer`
-- [ ] Step 2: 读取 `.agents/skills/references/composition-recipes.md`，并读取 SQLite 当前学习状态。
-- [ ] Step 3: 对概念缺口先输出 OpenSpec 风格的 Goal / Scope / Non-goals / Evidence / Stop condition，再开始教学。
-- [ ] Step 4: 输出当前阶段的最小 skill 流程和每步输入/输出；不超过 5 个 skill，超出则分阶段。
-- [ ] Step 5: 主线完成检验前，相关拓展只登记为后续候选，不切换主目标。
+- [ ] Step 2: 运行 `openspec list --json` 并读取相关 active change；先恢复 OpenSpec 当前阶段、审核状态、已完成任务和下一任务，再读取 SQLite 当前学习状态。
+- [ ] Step 3: 将 SQLite 中相关 topic、skill level、confidence、checkpoint、misconception 和 learner preference 作为长期证据交给 `adaptive-tutor`；不得只传主题名称，也不得让 SQLite 代替 OpenSpec 的过程状态。
+- [ ] Step 4: 对概念缺口先输出并保存待审核的 OpenSpec 方案；方案必须体现历史掌握程度、讲与不讲的理由、综合 checkpoint 范围，并等待用户明确批准。
+- [ ] Step 5: 用户批准后才启动正式教学；每个 skill 的输入/输出写入当前 change，用户插话后从 change 恢复，不超过 5 个 skill，超出则分阶段。
+- [ ] Step 6: 主线完成检验前，相关拓展只登记为后续候选，不切换主目标；章节结束后等待用户确认，不自动 archive 或推进下一章节。
 
 ## 输出格式
 

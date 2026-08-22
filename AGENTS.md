@@ -27,6 +27,17 @@
 - 用户要求“提交”时，先确认提交范围；不得顺手纳入无关的已有修改、学习状态数据库或未请求的新文件。
 - 用户指出重复错误时，先修正根因和对应规则，再继续主任务；不得只口头承诺而不更新适用的规则。
 
+## OpenSpec 工作流门禁
+
+- OpenSpec 已接入本仓库，负责跨消息恢复的当前工作流状态；SQLite 负责长期学习状态。两者不得重复承载同一字段。
+- 每次学习请求开始前，先运行 `openspec list --json`；若有相关 active change，必须读取其 proposal/design/specs/tasks 后恢复，不得另起一套方案或凭当前对话猜阶段。
+- 教学方案使用 OpenSpec change 持久化：`proposal.md` 记录目标、范围、非目标和审核状态；`design.md` 记录教学编排与取舍；`tasks.md` 记录小节、checkpoint、综合考核和回写步骤。
+- 教学方案的 `proposal.md` 未获用户明确批准前，不得开始正式教学；用户提出修改时更新 artifacts，并保持未批准状态。
+- OpenSpec 的 `apply` 在本仓库学习场景只推进教学任务和 checkpoint，不得把教学任务误当成代码实现；代码变更仍需遵守普通工程验证规则。
+- 被用户插话、切换主题或中断后，先保存/更新当前 change 状态，再处理插话；插话结束后先恢复原 change 的下一项任务，不得丢失主线。
+- `docs/learning/` 存放稳定学习总结，`.learning/learning-state.sqlite3` 存放长期状态；`openspec/changes/` 存放当前方案与进度，`openspec/changes/archive/` 存放已结束方案。
+- 未经用户明确同意，不得自动 archive 教学 change、推进下一章节或把 draft 标记为 approved。
+
 ## 默认输出协议
 
 ```text
