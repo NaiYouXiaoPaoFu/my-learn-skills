@@ -29,7 +29,8 @@
 
 ## OpenSpec 工作流门禁
 
-- OpenSpec 已接入本仓库，负责跨消息恢复的当前工作流状态；SQLite 负责长期学习状态。两者不得重复承载同一字段。
+- OpenSpec 已接入本仓库，相关 agent skills 统一位于 `.agents/skills/openspec-*`；OpenSpec CLI 的过程文件位于 `openspec/`。
+- OpenSpec 负责跨消息恢复的当前工作流状态；SQLite 负责长期学习状态。两者不得重复承载同一字段。
 - 每次学习请求开始前，先运行 `openspec list --json`；若有相关 active change，必须读取其 proposal/design/specs/tasks 后恢复，不得另起一套方案或凭当前对话猜阶段。
 - 教学方案使用 OpenSpec change 持久化：`proposal.md` 记录目标、范围、非目标和审核状态；`design.md` 记录教学编排与取舍；`tasks.md` 记录小节、checkpoint、综合考核和回写步骤。
 - 教学方案的 `proposal.md` 未获用户明确批准前，不得开始正式教学；用户提出修改时更新 artifacts，并保持未批准状态。

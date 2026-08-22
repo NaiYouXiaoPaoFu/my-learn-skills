@@ -19,4 +19,6 @@ openspec/changes/<topic>/
 - `.learning/learning-state.sqlite3`：长期学习等级、checkpoint 证据、误区、资料和偏好。
 - `docs/learning/`：稳定的学习总结，不作为当前工作流状态源。
 
+
+OpenSpec 相关 agent skills 统一位于 `.agents/skills/openspec-*`，因此所有 agent 都可按仓库默认技能发现机制读取。
 用户明确批准 `proposal.md` 后才能开始正式教学。被其他问题打断时，先更新 `tasks.md`，恢复时从 OpenSpec 状态继续。
