@@ -21,10 +21,12 @@ IRON LAW: 不默认用户会任何前置知识；先查证、先定一个可验�
 - [ ] Step 6: 基于状态证据编写并更新 draft proposal：Goal、当前已知与证据、未稳点、Scope、Non-goals、每项取舍理由、Prerequisites、Stages、Evidence、Checkpoint 设计、Stop condition、待确认问题。同步维护 design 和 tasks，不另建平行方案目录作为状态源。
 - [ ] Step 7: 先向用户展示待审核方案，等待明确批准或修改；批准前不得正式教学、推进 tasks 或写入正式 learning session。
 - [ ] Step 8: 用户批准后更新 proposal/design/tasks 为 approved，再调用 `concept-teacher`；被插话或中断时先更新 tasks 状态，恢复时从 OpenSpec 下一项任务继续。
-- [ ] Step 9: 识别自然相关拓展。只有能解释“它如何帮助当前 Goal”时才加入；否则记录为后续候选，不在本轮展开。
-- [ ] Step 10: 调用 `learning-checkpoint`。小节 checkpoint 只验证当前小节；章节综合 checkpoint 必须跨本章 Scope 与相关 Non-goals 设计，考察整体连接、边界、取舍和迁移，但不把未教学内容当作已掌握来扣分。
-- [ ] Step 11: 由 `adaptive-tutor` 根据本轮和历史证据评估掌握等级、决定升级/保持/降级；更新 tasks 和 checkpoint 证据。若连续两轮仍不稳，回退到更小概念并记录卡点。
-- [ ] Step 12: 只有形成稳定结论或用户明确要求时，交给 `learning-note-writer` 写入 SQLite/学习记录；章节完成后等待用户确认，不能自动 archive 或进入下一章。
+- [ ] Step 9: 教学进行中按小节实时收集用户的反问、模糊回答、错误因果、遗漏边界、纠偏后的变化和未回答问题；这些是当前教学证据，不能等 `learning-note-writer` 被调用后再补记。
+- [ ] Step 10: 每个小节 checkpoint 后立即更新阶段状态：已掌握、未稳点、证据、纠偏动作、当前等级、未验证边界和下一步；重复或高价值卡点即时写入 SQLite misconception/checkpoint，稳定结论再进入长期学习笔记。
+- [ ] Step 11: 识别自然相关拓展。只有能解释“它如何帮助当前 Goal”时才加入；否则记录为后续候选，不在本轮展开。
+- [ ] Step 12: 调用 `learning-checkpoint`。小节 checkpoint 只验证当前小节；章节综合 checkpoint 必须跨本章 Scope 与相关 Non-goals 设计，考察整体连接、边界、取舍和迁移，但不把未教学内容当作已掌握来扣分。
+- [ ] Step 13: 由 `adaptive-tutor` 根据本轮和历史证据评估掌握等级、决定升级/保持/降级；更新 tasks 和 checkpoint 证据。若连续两轮仍不稳，回退到更小概念并记录卡点。
+- [ ] Step 14: 只有形成稳定结论或用户明确要求时，交给 `learning-note-writer` 写入结构化长期学习笔记；章节完成后等待用户确认，不能自动 archive 或进入下一章。
 
 ## 输出格式
 
