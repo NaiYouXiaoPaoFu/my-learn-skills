@@ -38,27 +38,8 @@
   https://usepreppilot.com/blog/project-walkthrough-interview-guide  
   重点看：如何讲项目上下文、个人贡献、技术取舍和后续追问。
 
-## Go Web / 后端基础
-
-- Go `net/http` package  
-  https://pkg.go.dev/net/http  
-  重点看：`Server`、`Handler`、`ServeMux`、请求响应模型。
-
-- Go by Example: HTTP Servers  
-  https://gobyexample.com/http-servers  
-  重点看：最小 HTTP server 和 handler 写法。
-
-- Gin 官方文档  
-  https://gin-gonic.com/en/docs/  
-  重点看：routing、middleware、binding、error handling。
-
-- MDN HTTP Overview  
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview  
-  重点看：HTTP 请求/响应、headers、状态码和 Web 架构背景。
-
 ## 阅读建议
 
 1. 先看 Skills / Agent 编排，理解为什么本仓库拆成小 skill。
 2. 再看面试式追问资料，只学提问方式，不背题。
-3. 做 Go Web issue 时，优先回到 `net/http`、Gin、MDN 这些基础资料。
-4. 每次只带着一个 issue 或一个代码链路去读，不做泛泛阅读。
+3. 每次只带着一个 issue 或一个代码链路去读，不做泛泛阅读。
