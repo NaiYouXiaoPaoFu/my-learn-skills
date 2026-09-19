@@ -31,7 +31,7 @@
 
 ### Modified Capabilities
 
-无（新建学习主题，不修改已有 C# 教学方案）。
+无（本 change 仅新增 GDScript 学习主题）。
 
 ## Goal / Scope / Non-goals
 
@@ -54,7 +54,7 @@
 
 **Non-goals（本轮不展开，登记为后续候选）：**
 
-- GDScript 之外的 C#、C++、GDExtension、Shader、VisualScript 或完整游戏美术/音频制作。
+- GDScript 之外的其他编程语言、GDExtension、Shader、VisualScript 或完整游戏美术/音频制作。
 - 3D 渲染、动画树、导航、多人联机、着色器编程和平台发布细节；仅在综合项目确实需要时做最小接口说明。
 - Godot 全部类库 API 背诵；以查阅 Class Reference、理解抽象和完成需求为目标。
 - 高级性能工程（线程安全、服务器权威网络、底层渲染、内存布局）与大型团队生产流程。
